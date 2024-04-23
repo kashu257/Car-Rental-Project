@@ -1,0 +1,68 @@
+<nav class="navbar navbar-expand-lg" style="background-color: #f8f9fa;" aria-label="Thirteenth navbar example">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      RentACar</a
+    >
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#"
+            ><i class="fa fa-fw fa-home"></i>Home</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/contact"
+            ><i class="fa fa-fw fa-envelope"></i>Contact</a
+          >
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+        </li>
+        <li><app-cart-summary></app-cart-summary></li>
+      </ul>
+      <div class="text-end" *ngIf="checkToLogin() == false">
+        <button
+          id="login"
+          routerLink="login"
+          type="button"
+          class="btn btn-success"
+        >
+          Login
+        </button>
+        <button routerLink="register" type="button" class="btn btn-success">
+          Register
+        </button>
+      </div>
+      <div class="dropdown" *ngIf="userLoggedIn">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+          <img width="30px" height="30px" class="rounded-circle" src="/assets/özçekim.gif" />
+          {{"Umang Kumar"}}
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li><a class="btn dropdown-item" routerLink="/car">Management</a></li>
+          <li><a class="btn dropdown-item" routerLink="/profile">My Information</a></li>
+          <li><a class="btn dropdown-item" routerLink="">My Orders</a></li>
+          <li><a class="btn dropdown-item" routerLink="/cart">My cart</a></li>
+          <li><a class="btn dropdown-item" (click)="logout()">Sign Out</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+/>

@@ -1,0 +1,107 @@
+<div class="row">
+    <div class="col-md-2" >
+      <br>
+      <app-brand></app-brand>
+      <br>
+      <app-color></app-color>
+      <br>
+    </div>
+    <div class="col-md-10">
+      <div class="row mt-4" style="margin-left: 1%">
+        <div
+          *ngFor="let carDetail of cardetails"
+          class="card mt-2 mr-2"
+          style="width: 32rem; margin-right: 10px"
+        >
+          <img
+            *ngIf="carDetail.imagePath"
+            [src]="baseUrl + carDetail.imagePath"
+            class="card-img-top"
+            style="object-fit: cover"
+            width="70"
+            height="35%"
+          />
+
+          <img
+            *ngIf="!carDetail.imagePath"
+            src="/assets/defaultCar.jpg"
+            class="card-img-top"
+            style="object-fit: cover"
+            width="100"
+            height="50%"
+          />
+
+          <div class="card-body">
+            <h4 class="cart-title">
+              {{""}}
+            </h4>
+          </div>
+
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <i><b>Color - </b></i>{{ carDetail.colorName }}
+            </li>
+            <li class="list-group-item">
+              <i><b>Brand - </b></i>{{ carDetail.brandName }}
+            </li>
+            <li class="list-group-item">
+              <i><b>Model - </b></i>{{ carDetail.carName }}
+            </li>
+            <li class="list-group-item">
+              <i><b>Model Year - </b></i>{{ carDetail.modelYear }}
+            </li>
+            <li class="list-group-item">
+              <i><b>Detail - </b></i>{{ carDetail.description }}
+            </li>
+            <li class="list-group-item">
+              <i><b>Daily Price - </b></i
+              >{{ carDetail.dailyPrice | currency : "TRY" : "₹" : "4.2-2" }}
+            </li>
+            <li class="list-group-item">
+              <i><b>Daily Rate with VAT- </b></i
+              >{{
+                carDetail.dailyPrice
+                  | vatAdded : 10
+                  | currency : "TRY" : "₹" : "4.2-2"
+              }}
+            </li>
+            <li class="list-group-item">
+              <i><b>Find Score - </b></i>{{ carDetail.minFindeksScore }}
+            </li>
+          </ul>
+          <br />
+          <div class="form-group">
+            <label for="rentDate">Rent Date:</label>
+            <input
+              type="date"
+              class="form-control"
+              [(ngModel)]="rentDate"
+              name="rentDate"
+            />
+          </div>
+          <div class="form-group">
+            <label for="returnDate">Return Date:</label>
+            <input
+              type="date"
+              class="form-control"
+              [(ngModel)]="returnDate"
+              name="returnDate"
+            />
+          </div>
+
+          <div class="card-body">
+            <div class="row">
+              <button
+                type="button"
+                class="btn btn-success"
+                (click)="addToCart(carDetail)"
+              >
+                Rent Car
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+

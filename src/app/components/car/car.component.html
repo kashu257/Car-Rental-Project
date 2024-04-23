@@ -1,0 +1,92 @@
+<div class="row">
+  <div class="col-md-2">
+    <br />
+    <app-brand></app-brand>
+    <br />
+    <app-color></app-color>
+    <br />
+  </div>
+  <div class="col-md-10">
+    <div class="mb-3">
+      <input
+        type="text"
+        [(ngModel)]="filterText"
+        class="form-control"
+        id="filterText"
+        placeholder="Search by vehicle, make, color name or model year"
+      />
+    </div>
+    <div class="alert alert-primary" *ngIf="filterText.length > 1">
+      {{ filterText }} You have searched for
+    </div>
+    <app-car-filter></app-car-filter>
+    <div class="row mt-4" style="margin-left: 1%">
+      <div
+        *ngFor="let carDetail of cardetails | filterPipe : filterText"
+        class="card mt-2 mr-2"
+        style="width: 18rem; margin-right: 10px"
+      >
+        <img
+          *ngIf="carDetail.imagePath"
+          [src]="baseUrl + carDetail.imagePath"
+          class="card-img-top"
+          style="object-fit: cover"
+          width="100"
+          height="50%"
+        />
+
+        <img
+          *ngIf="!carDetail.imagePath"
+          src="/assets/defaultCar.jpg"
+          class="card-img-top"
+          style="object-fit: cover"
+          width="100"
+          height="50%"
+        />
+
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <i><b>Brand | </b></i>{{ carDetail.brandName }}
+          </li>
+          <li class="list-group-item">
+            <i><b>Model | </b></i>{{ carDetail.carName }}
+          </li>
+          <li class="list-group-item">
+            <i><b>Color | </b></i>{{ carDetail.colorName }}
+          </li>
+          <li class="list-group-item">
+            <i><b>Model Year | </b></i>{{ carDetail.modelYear }}
+          </li>
+          <li class="list-group-item">
+            <i><b>Daily rate | </b></i
+            >{{ carDetail.dailyPrice | currency : "TRY" : "₹" : "4.2-2" }}
+          </li>
+          <li class="list-group-item">
+            <i><b>Find Score | </b></i>{{ carDetail.minFindeksScore }}
+          </li>
+        </ul>
+        <div class="card-body">
+          <section style="float: top">
+            <button
+              (click)="setCurrentCarDetails(carDetail)"
+              routerLink="/cardetails/car/{{ carDetail.carId }}"
+              [class]="getCurrentCarDetails()"
+              type="button"
+              class="btn btn-outline-success"
+            >
+              Details
+            </button>
+            <button
+              (click)="addToCart(carDetail)"
+              id="rentalButton"
+              type="button"
+              class="btn btn-outline-success"
+            >
+              Rent
+            </button>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
